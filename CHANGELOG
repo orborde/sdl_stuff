@@ -1,0 +1,32 @@
+4 May 2006 02:56
+	William Ehlhardt
+	For some reason, I went and changed the SCREEN argument of all the SDL drawing commands to be at the end of the parameter list. No, I don't know why.
+	Hmm...most stuff uses it at the beginning, so it should probably be there.
+	The SDL API seems to put it at the beginning.
+	So...
+	BUGFIX: mousedl.c
+		See above.
+
+15 May 2006 19:22
+	William Ehlhardt
+	Messed with SDL_drawfunc.c and cube3_brusher.c
+	Trying to find the cause of the "vertical lines" color artifact
+		Suppressed green and blue channels in drawGoodShadedTriangle
+			in SDL_drawfunc.c to see the color patterns
+			RESULT: Presence of the vertical lines artifact
+			confirmed.
+		Changed cube3_brusher.c to use drawSlowShadedTriangle
+			RESULT: Saw something similar, except apparently
+			along the lines that SlowShadedTriangle draws along
+		Theory: There is a divide in the color calculations on the
+			x-coord loop. This may be causing loss of precision
+
+22 May 2006 11:05
+	William Ehlhardt
+	cube3_brusher no longer dependant on protobrusher
+
+19 Jan 2007 02:00
+	William Ehlhardt
+	Added drawSlowGoodShadedTriangle, which is supposed to be the ultimate
+		in smooth, pretty triangles, but exhibits the same weird jaggy
+		stuff as drawGoodShadedTriangle...
