@@ -529,7 +529,11 @@ void drawSlowGoodShadedTriangle(
 
 	// check for imax=0, just for giggles
 	if (imax == 0)
-		printf("Uh oh. imax == 0!\n");
+	  {
+	    printf("%d:Uh oh. imax == 0!\n", __LINE__);
+	    printf("I am a coward and am not going to render this triangle\n");
+	    return;
+	  }
 
 	// draw left half
 	for ( x = ax; x < bx; x++, i++, j++ )
