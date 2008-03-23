@@ -20,7 +20,8 @@
 
 #define FPS 1000
 // delay time between frames in msec
-#define DELAY (1000 / FPS)
+//#define DELAY (1000 / FPS)
+#define DELAY 0
 
 SDL_Surface * screen;
 
@@ -180,6 +181,14 @@ int main ()
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{ printf("Video init failed\n"); return 1; };
 
+	char videodriver[100];
+	SDL_VideoDriverName(videodriver, 80);
+
+	printf("When all is said and done,\n"
+	       "We find ourselves using\n"
+	       "%s\n", videodriver);
+
+
 	// reg SDL_Quit to be called at exit to clean up
 	atexit(SDL_Quit);
 
@@ -216,7 +225,6 @@ int main ()
 			shooters[i].trail[i].y = shooters[i].y;
 		}*/
 	}
-
 
 	printf("Entering main loop\n");
 	Uint32 last_time = SDL_GetTicks();
